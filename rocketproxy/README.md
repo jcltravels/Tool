@@ -11,6 +11,7 @@
 [`RocketProxy.conf`](RocketProxy.conf) 把本仓库的内容合并成一个配置：
 
 - 广告拦截：`MyBlockAds.list`、`blockads.list`、Egern `blockad.yaml`、`fanqieNoad.list`、`hongguoAD.list`、微信去广告
+- WhatsApp 聊天及语音/视频通话（通话媒体走 UDP，已用真实通话验证）
 - DNS 防泄露、分流修正（直连）、AI、流媒体、Emby、Talkatone、游戏、隐藏 IP 归属地（代理）
 - YouTube 去广告脚本、CMS 影视去广告脚本
 - 国内 IP 直连，其余走代理
@@ -20,6 +21,7 @@
 `RocketProxy.conf` combines this repo into one config:
 
 - Ad blocking: `MyBlockAds.list`, `blockads.list`, Egern `blockad.yaml`, `fanqieNoad.list`, `hongguoAD.list` and WeChat ads.
+- WhatsApp chat plus voice and video calls. Call media is UDP; tested with a real call.
 - Through the proxy: DNS leak tests, AI, streaming, Emby, Talkatone, games and IP-location hiding. Direct: domestic-site corrections.
 - YouTube and CMS video ad-removal scripts.
 - Mainland China IPs go direct, everything else through the proxy.
@@ -69,12 +71,14 @@ Add any of these under Shield -> Regional & Bypass Rules -> Add Custom Rule Set,
 
 - 一键导入适用于 iOS、iPadOS 和 macOS 版。导入后在「路由」中长按配置，选择“使用此配置”。
 - 脚本和 MITM 需要在 Rocket Proxy 中安装并信任证书；未信任时 Rocket Proxy 会自动关闭解密，其余规则照常生效。
-- Rocket Proxy 暂不支持 `AND` 组合规则；YouTube 模块中阻止 QUIC 的 `AND` 规则由 Rocket Proxy 自动处理。
+- WhatsApp 通话需要支持 UDP 的节点（如 Shadowsocks、Trojan、VLESS、Hysteria2、TUIC）。
+- 配置文件中的 `AND` 组合规则可以使用，规则列表文件中的 `AND` 行会被跳过；YouTube 模块中阻止 QUIC 的规则由 Rocket Proxy 自动处理。
 - AdGuard 格式的 `adguard/fanqie.txt` 暂不支持。
 
 - One-tap import works on iOS, iPadOS and macOS. After import, long-press the config under Routing and choose "Use This Config".
 - Scripts and MITM need the Rocket Proxy certificate installed and trusted. Until it is, Rocket Proxy turns decryption off and the other rules keep working.
-- `AND` rules are not supported yet. Rocket Proxy blocks QUIC for decrypted hosts itself, which covers the `AND` rules in the YouTube modules.
+- WhatsApp calls need a server that carries UDP, such as Shadowsocks, Trojan, VLESS, Hysteria2 or TUIC.
+- `AND` rules work in a config file but are skipped inside rule-list files. Rocket Proxy blocks QUIC for decrypted hosts itself, which covers the YouTube modules' `AND` rules.
 - The AdGuard-format `adguard/fanqie.txt` is not supported.
 
 ## 下载 · Download
